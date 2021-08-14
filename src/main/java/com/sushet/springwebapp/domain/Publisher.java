@@ -1,14 +1,10 @@
 package com.sushet.springwebapp.domain;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Publisher {
@@ -18,21 +14,9 @@ public class Publisher {
     private String city;
     private String state;
 
-
-
-    @OneToMany
-    @JoinColumn(name="publisher_id")
-    private Set<Book> books =new HashSet<>();
-
-
-    public Set<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(Set<Book> books) {
-        this.books = books;
-    }
-
+    @Id
+    @GeneratedValue(strategy =  GenerationType.AUTO)
+    private Long id;
 
     public Publisher(String name, String addressLine1, String city, String state) {
         this.name = name;
@@ -41,39 +25,14 @@ public class Publisher {
         this.state = state;
     }
     public Publisher()
-
     {}
-
-    @Override
-    public String toString() {
-        return "Publisher{" +
-                "name='" + name + '\'' +
-                ", addressLine1='" + addressLine1 + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", id=" + id +
-                '}';
+    public Long getId() {
+        return id;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Publisher publisher = (Publisher) o;
-        return Objects.equals(name, publisher.name) &&
-                Objects.equals(addressLine1, publisher.addressLine1) &&
-                Objects.equals(city, publisher.city) &&
-                Objects.equals(state, publisher.state);
+    public void setId(Long id) {
+        this.id = id;
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, addressLine1, city, state);
-    }
-
-    @Id
-    @GeneratedValue(strategy =  GenerationType.AUTO)
-    private Long id;
 
     public String getName() {
         return name;
@@ -107,7 +66,32 @@ public class Publisher {
         this.state = state;
     }
 
+    @Override
+    public String toString() {
+        return "Publisher{" +
+                "name='" + name + '\'' +
+                ", addressLine1='" + addressLine1 + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", id=" + id +
+                '}';
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Publisher publisher = (Publisher) o;
+        return Objects.equals(name, publisher.name) &&
+                Objects.equals(addressLine1, publisher.addressLine1) &&
+                Objects.equals(city, publisher.city) &&
+                Objects.equals(state, publisher.state);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, addressLine1, city, state);
+    }
 
 
 

@@ -15,11 +15,10 @@
         <th>Publisher</th>
 
     </tr>
-    <tr th:each="book:${books}"}>
-        <td th:test="${book.id}">123</td>
-        <td th:test="${book.title}">Spring in Action</td>
-        <td th:test="${book.publisher.name}"> Wrox</td>
-
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}">"${book.id}"</td>
+        <td th:text="${book.title}">"${book.title}"</td>
+        <td th:text="${book.publisher.name}">"${book.publisher.name}"</td>
     </tr>
 </table>
 
